@@ -8,7 +8,7 @@ export const locations = [{
         venueId: 'ChIJZY6HlTin_UYRI-F_iwmj6Lk'
     },
     {
-        name: "Pierozek Pierogarnia",
+        name: "Pierożek Pierogarnia",
         location: {
             address: 'al. Jana Pawła II',
             lat: 54.51853173,
@@ -17,7 +17,7 @@ export const locations = [{
         venueId: 'ChIJWRxyezmn_UYR2EzS01diCdU'
     },
     {
-        name: "ORP Byskawica",
+        name: "ORP Błyskawica",
         location: {
             address: 'al. Jana Pawła II',
             lat: 54.5195615,
