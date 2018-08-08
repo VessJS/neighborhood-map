@@ -3,66 +3,12 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react'
 import locations from '../Data/locations'
 
 export class MapContainer extends Component {
-    state = {
-        showingInfoWindow: false,
-        activeMarker: {},
-        selectedPlace: {},
-        error: false,
-        locations: [],
-        filteredLocations: [],
-    };
-    onPinClick = (props, marker, e) =>
-        this.setState({
-            showingInfoWindow: true,
-            activeMarker: marker,
-            selectedPlace: props,
-        });
 
-    onMapClicked = (props) => {
-        if (this.state.showingInfoWindow) {
-            this.setState({
-                showingInfoWindow: false,
-                activeMarker: null,
-            })
-        }
-    };
-
-    componentDidMount() {
-        const key = "7ef1ac0ab2778bc938233edba3b4ff9c";
-        const secret = "19b4fb9bdb7a8ad7";
-        const text = ["ORP%20B%C5%81YSKAWICA", "Pierożek%20Pierogarnia", "Aquarium", "Dom%20Marynarza", "Barracuda"]
-        for (var item of text) {
-            fetch(
-                `https://api.flickr.com/services/rest/?method=flickr.photos.search&page=1&api_key=${key}&format=json&nojsoncallback=1&text=${item}&extras=url_o`
-                //    `https://api.foursquare.com/v2/venues/explore?ll=52.2246756,21.0122287&categoryId=4bf58dd8d48988d142941735&checkin=intent&radius=6000&limit=50&client_id=${key}&client_secret=${secret}&v=20180726`
-            )
-
-                .then(response => response.json())
-                .then(res => {
-                    const result = res.response;
-
-                    this.setState({
-                        locations: result,
-                        filteredLocations: result
-                    });
-                })
-                .catch(error => {
-                    console.log(error);
-                    this.setState({ error: true });
-                });
-
-            // HANDLE ERRORS
-            window.gm_authFailure = () => this.setState({ error: true });
-            if (window.google === undefined) {
-                this.setState({ error: true });
-            }
-        }
-    }
 
     render() {
         const style = {
-            width: '70%',
-            height: '80%'
+            width: '90%',
+            height: '90%'
         }
         return (
             <Map google={this.props.google}
@@ -72,10 +18,11 @@ export class MapContainer extends Component {
                 initialCenter={{
                     lat: 54.5188898,
                     lng: 18.5305409
-                }}>
-
-                <Marker onClick={this.onPinClick}
-                    name={'Current location'} />
+                }}
+            >
+               
+                <Marker onClick={this.props.onPinClick}
+                    name={'Gdynia'} />
                 <Marker
                     onClick={this.onPinClick}
                     name={'Current location'}
@@ -110,11 +57,12 @@ export class MapContainer extends Component {
                     position={locations[4].location} />
 
                 <InfoWindow
-                    marker={this.state.activeMarker}
-                    visible={this.state.showingInfoWindow}
-                    onClose={this.onInfoWindowClose}>
+                    marker={this.props.activeMarker}
+                    visible={this.props.showingInfoWindow}
+                    onClose={this.props.onInfoWindowClose}
+                >
                     <div>
-                        <h1>{this.state.selectedPlace.name}</h1>
+                        <h1>{this.props.activeMarker}</h1>
                     </div>
                 </InfoWindow>
             </Map>
