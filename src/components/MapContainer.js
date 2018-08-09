@@ -6,8 +6,9 @@ export class MapContainer extends Component {
 
 
     render() {
- 
-        
+        let locations = this.props.locations;
+        console.log(locations);
+
         const style = {
             width: '90%',
             height: '90%'
@@ -22,7 +23,7 @@ export class MapContainer extends Component {
                     lng: 18.5305409
                 }}
             >
-               
+
                 <Marker onClick={this.props.onPinClick}
                     name={'Gdynia'} />
                 <Marker
