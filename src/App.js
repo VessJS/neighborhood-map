@@ -3,6 +3,7 @@ import './App.css';
 import MapContainer from './components/MapContainer'
 import locations from './Data/locations'
 import Menu from './components/Menu';
+import Button from './components/Button';
 
 class App extends Component {
 
@@ -10,12 +11,19 @@ class App extends Component {
         error: false,
         filteredLocations: [],
         query: '',
-        selectLocationId: '',
         locations: locations,
         photos: [],
         activeMarker: {},
         showingInfoWindow: false,
         markerAnimation: 0,
+        menuActive: false,
+    };
+
+    allMarkers = [];
+    addMarker = marker => {
+        if (marker) {
+            this.allMarkers.push(marker);
+        }
     };
 
     onListItemClick = (e, marker) => {
@@ -34,26 +42,46 @@ class App extends Component {
         });
     };
 
+    toggleMenu = () => {
+        if (this.state.menuActive) {
+            this.setState({
+                menuActive: false
+            });
+        } else {
+            this.setState({
+                menuActive: true
+            });
+        }
+    };
+
     render() {
+        const menuOpen = this.state.menuActive
+
         return (
             <div className="App">
                 <header className="App-header">
-                    {/* <menuButton/> */}
                     <h1 className="App-title">Neighborhood Map</h1>
-                </header>
-                <p className="App-intro">
-                    <div className="map" role="application">
-                        <MapContainer
-                            google={window.google}
-                            onPinClick={this.onPinClick}
-                            onInfoWindowClose={this.onInfoWindowClose}
-                            onMapClicked={this.onMapClicked}
-                            appState={this.state}
-                            marker={this.props.activeMarker}
-                            locations={this.state.locations}
+                    <Button
+                        toggleMenu={this.toggleMenu}
+                    />
+                    {menuOpen && (
+                        <Menu
+                            className="menu"
+                            onListItemClick={this.onListItemClick}
                         />
-                    </div>
-                </p>
+                    )}
+                </header>
+                <div className="map" role="application">
+                    <MapContainer
+                        google={window.google}
+                        onPinClick={this.onPinClick}
+                        onInfoWindowClose={this.onInfoWindowClose}
+                        onMapClicked={this.onMapClicked}
+                        appState={this.state}
+                        marker={this.props.activeMarker}
+                        locations={this.state.locations}
+                    />
+                </div>
             </div>
         );
     }

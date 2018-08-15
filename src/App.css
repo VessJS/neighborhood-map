@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  display: flex;
+  background-color: #fff;
 }
 
 .App-logo {
@@ -13,9 +14,10 @@
   align-items: center;
   border-bottom: 1px solid rgb(238, 238, 238);
   position: relative;
-  padding: 0 30px 0 70px;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  box-shadow: 0 6px 23px 0 rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  min-width: 290px;
 }
 
 .App-title {
@@ -26,9 +28,48 @@
   font-size: large;
 }
 
+.menu {
+  list-style: none;
+  padding: 0;
+}
 
+.button {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.button:hover {
+  background-color: RoyalBlue;
+}
+
+.map {
+  flex: 1;
+  position: relative;
+}
+
+.list-item {
+  padding: 20px 20px 20px 50px;
+  color: #333;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-bottom: 1px solid rgb(219, 219, 219);
+}
+
+.list-item:first-child {
+  border-top: 1px solid rgb(219, 219, 219);
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item:hover,
+.list-item:focus {
+  padding-left: 60px;
+  background-color: DodgerBlue;
 }

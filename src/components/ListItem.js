@@ -1,18 +1,18 @@
 import React from "react";
 
-const ListItem = (props) => {
-    console.log(props);
+export const ListItem = (props) => {
+    console.log(props.onListItemClick)
     return (
-        <ul className='list-item'>
-            <li
-                onClick={props.onListItemClick}
-                name={props.locations.name}
-                key={props.locations.venueId}
-            >
-                {props.name}
-            </li>
-        </ul>
+        <li className="list-item"
+            onClick={props.onListItemClick}
+            name={props.name}
+            key={props.venueId}
+            role="button"
+        >
+            {props.name}
+        </li>
     )
 }
+
 
 export default ListItem;

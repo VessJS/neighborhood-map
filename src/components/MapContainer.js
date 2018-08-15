@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react'
-import Menu from './Menu';
 import locations from '../Data/locations'
 
 
@@ -70,14 +69,15 @@ export class MapContainer extends Component {
 
     render() {
         const style = {
-            width: '100%',
+            width: '80%',
             height: '70vh',
             position: 'relative'
         };
 
         return (
 
-            <Map google={this.props.google}
+            <Map
+                google={this.props.google}
                 style={style}
                 zoom={13}
                 onClick={this.onMapClicked}
@@ -86,18 +86,14 @@ export class MapContainer extends Component {
                     lng: 18.5305409
                 }}
             >
-                {/* <Menu
-                    onListItemClick={this.onListItemClick}
-                    name={this.locations.name}
-                    key={this.location.venueId}
-                /> */}
                 {this.props.locations.map(location => (
                     <Marker
                         onClick={this.onPinClick}
                         title={location.name}
                         name={location.name}
                         position={location.location}
-                        key={location.venueId} />
+                        key={location.venueId}
+                    />
                 ))}
                 <InfoWindow
                     marker={this.state.activeMarker}
