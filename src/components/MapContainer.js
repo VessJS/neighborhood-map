@@ -10,7 +10,6 @@ export class MapContainer extends Component {
         selectedPlace: {},
         locationImage: '',
         markerAnimation: 0,
-        error: false,
     };
 
     onPinClick = (props, marker) => {
@@ -43,9 +42,7 @@ export class MapContainer extends Component {
             })
             .catch(error => {
                 console.log(error);
-                this.setState({
-                    error: true
-                });
+                this.setState({ error: true });
             })
 
     };
@@ -72,7 +69,7 @@ export class MapContainer extends Component {
 
     render() {
         const style = {
-            width: '100%',
+            width: '80%',
             height: '70vh',
             position: 'relative'
         };
@@ -80,7 +77,6 @@ export class MapContainer extends Component {
         return (
 
             <Map
-                className="map-container"
                 google={this.props.google}
                 style={style}
                 zoom={13}
