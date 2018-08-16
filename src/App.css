@@ -1,20 +1,12 @@
 .App {
   display: flex;
   background-color: #fff;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  width: 100%;
 }
 
 .App-header {
-  height: auto;
-  justify-content: center;
-  align-items: center;
   border-bottom: 1px solid rgb(238, 238, 238);
-  position: relative;
-  padding: 30px;
+  padding: 20px;
   box-shadow: 0 6px 23px 0 rgba(0, 0, 0, 0.1);
   background-color: #fff;
   min-width: 290px;
@@ -22,10 +14,6 @@
 
 .App-title {
   font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
 }
 
 .menu {
@@ -47,7 +35,7 @@
 }
 
 .map {
-  flex: 1;
+  width: 100%;
   position: relative;
 }
 
@@ -72,4 +60,18 @@
 .list-item:focus {
   padding-left: 60px;
   background-color: DodgerBlue;
+}
+
+@media only screen and (max-width: 850px) {
+  .App {
+    margin: 0;
+    width: 100%;
+    flex-direction: column;
+  }
+  .map {
+    order: -1;
+  }
+  .map-container {
+    position: relative !important;
+  }
 }
