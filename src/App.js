@@ -74,7 +74,7 @@ class App extends Component {
                         </div>
                     )}
                 </header>
-                <div className="map" role="map">
+                <div className="map">
                     <MapContainer
                         google={window.google}
                         onPinClick={this.onPinClick}
