@@ -5,7 +5,8 @@ export const locations = [{
             lat: 54.51838849,
             lng: 18.55732005
         },
-        venueId: 'ChIJZY6HlTin_UYRI-F_iwmj6Lk'
+        venueId: 'ChIJZY6HlTin_UYRI-F_iwmj6Lk',
+        category: "attraction"
     },
     {
         name: "Pierożek Pierogarnia",
@@ -14,7 +15,8 @@ export const locations = [{
             lat: 54.51853173,
             lng: 18.55076473
         },
-        venueId: 'ChIJWRxyezmn_UYR2EzS01diCdU'
+        venueId: 'ChIJWRxyezmn_UYR2EzS01diCdU',
+        category: "restaurant"
     },
     {
         name: "ORP Błyskawica",
@@ -23,7 +25,8 @@ export const locations = [{
             lat: 54.5195615,
             lng: 18.5511764
         },
-        venueId: 'ChIJOTJWIDmn_UYR9Wbf7PDb6ZY'
+        venueId: 'ChIJOTJWIDmn_UYR9Wbf7PDb6ZY',
+        category: "attraction"
     },
     {
         name: "Restauracja Barracuda",
@@ -32,7 +35,8 @@ export const locations = [{
             lat: 54.505679,
             lng: 18.555725
         },
-        venueId: 'ChIJB85ICEun_UYR0Y741KRD9Rc'
+        venueId: 'ChIJB85ICEun_UYR0Y741KRD9Rc',
+        category: "restaurant"
     },
     {
         name: "Dom Marynarza",
@@ -41,7 +45,8 @@ export const locations = [{
             lat: 54.5078537,
             lng: 18.5514474
         },
-        venueId: 'ChIJoes7cTSn_UYRsqq3Q4oaOnk'
+        venueId: 'ChIJoes7cTSn_UYRsqq3Q4oaOnk',
+        category: "hotel"
     },
 
 ]

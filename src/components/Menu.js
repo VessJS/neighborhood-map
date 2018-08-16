@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
-import ListItem from "./ListItem";
-import locations from "../Data/locations"
+import React, { Component } from 'react';
+import locations from "../Data/locations";
+import Search from "./Search";
 
 export class Menu extends Component {
     constructor(props) {
         super();
         this.locations = locations;
+        this.searchQuery = props.searchQuery;
     }
 
 
@@ -13,13 +14,12 @@ export class Menu extends Component {
 
         return (
             <ul className='menu'>
-                {this.locations.map(loc => (
-                    <ListItem
-                        onListItemClick={this.props.onListItemClick}
-                        name={loc.name}
-                        key={loc.venueId}
-                    />
-                ))}
+                <Search
+                    locations={locations}
+                    onSearchCategory={this.onSearchCategory}
+                    searchQuery={this.searchQuery}
+                />
+
             </ul>
         );
     };

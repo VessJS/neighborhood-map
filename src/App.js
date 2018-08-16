@@ -4,15 +4,16 @@ import MapContainer from './components/MapContainer'
 import locations from './Data/locations'
 import Menu from './components/Menu';
 import Button from './components/Button';
+// import Search from './components/Search';
 
 class App extends Component {
 
     state = {
         error: false,
         filteredLocations: [],
-        query: '',
         locations: locations,
         photos: [],
+        // searchQuery: "",
         activeMarker: {},
         showingInfoWindow: false,
         markerAnimation: 0,
@@ -24,14 +25,6 @@ class App extends Component {
         if (marker) {
             this.allMarkers.push(marker);
         }
-    };
-
-    onListItemClick = (e, marker) => {
-        this.setState({
-            activeMarker: marker,
-            showingInfoWindow: true,
-            markerAnimation: 1,
-        });
     };
 
     onInfoWindowClose = (props) => {
@@ -65,10 +58,12 @@ class App extends Component {
                         toggleMenu={this.toggleMenu}
                     />
                     {menuOpen && (
-                        <Menu
-                            className="menu"
-                            onListItemClick={this.onListItemClick}
-                        />
+                        <div>
+                            <Menu
+                                className="menu"
+                                onListItemClick={this.onListItemClick}
+                            />
+                        </div>
                     )}
                 </header>
                 <div className="map" role="application">
