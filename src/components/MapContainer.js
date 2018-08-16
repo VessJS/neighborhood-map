@@ -71,14 +71,13 @@ export class MapContainer extends Component {
     };
 
     render() {
+        // Styling added to Map
         const style = {
             width: '100%',
             height: '70vh',
             position: 'relative'
         };
-
         return (
-
             <Map
                 className="map-container"
                 google={this.props.google}
@@ -97,6 +96,7 @@ export class MapContainer extends Component {
                         name={location.name}
                         position={location.location}
                         key={location.venueId}
+                        ref={this.props.addMarker}
                     />
                 ))}
                 <InfoWindow

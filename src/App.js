@@ -10,23 +10,21 @@ class App extends Component {
 
     state = {
         error: false,
-        filteredLocations: [],
         locations: locations,
         photos: [],
-        // searchQuery: "",
-        activeMarker: {},
         showingInfoWindow: false,
         markerAnimation: 0,
         menuActive: false,
+        activeMarker: {},
     };
-
+    // Added all markers to one array
     allMarkers = [];
     addMarker = marker => {
         if (marker) {
             this.allMarkers.push(marker);
         }
     };
-
+    // This happens when info window is closed
     onInfoWindowClose = (props) => {
         this.setState({
             showingInfoWindow: false,
@@ -34,7 +32,18 @@ class App extends Component {
             selectedPlace: null,
         });
     };
-
+    // This happens when item on list is closed
+    onListItemClick = (e) => {
+        const click = this.allMarkers.filter(
+            el => el.marker.name === e.target.textContent
+        );
+        this.setState({
+            activeMarker: click[0].marker,
+            showingInfoWindow: true,
+            markerAnimation: 1,
+        });
+    };
+    // This opens list item
     toggleMenu = () => {
         if (this.state.menuActive) {
             this.setState({
@@ -49,7 +58,6 @@ class App extends Component {
 
     render() {
         const menuOpen = this.state.menuActive
-
         return (
             <div className="App">
                 <header className="App-header">
@@ -75,6 +83,7 @@ class App extends Component {
                         appState={this.state}
                         marker={this.props.activeMarker}
                         locations={this.state.locations}
+                        addMarker={this.addMarker}
                     />
                 </div>
             </div>

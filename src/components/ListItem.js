@@ -8,6 +8,7 @@ export const ListItem = (props) => {
             name={props.name}
             key={props.venueId}
             role="button"
+            tabIndex="3"
         >
             {props.name}
         </li>
