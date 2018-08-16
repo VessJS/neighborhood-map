@@ -35,7 +35,6 @@ export class MapContainer extends Component {
 
             .then(photos => {
                 console.log(photos);
-
                 this.setState({
                     locationImage: `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photos.candidates[0].photos[0].photo_reference}&key=${googlePlacesKey}`
                     // `https://farm${photos.photos.photo[0].farm}.staticflickr.com/${photos.photos.photo[0].server}/${photos.photos.photo[0].id}_${secret}_o.png`
@@ -47,7 +46,6 @@ export class MapContainer extends Component {
                     error: true
                 });
             })
-
     };
 
     onMapClicked = (props) => {

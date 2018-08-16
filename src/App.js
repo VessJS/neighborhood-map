@@ -59,8 +59,8 @@ class App extends Component {
     render() {
         const menuOpen = this.state.menuActive
         return (
-            <div className="App">
-                <header className="App-header">
+            <div className="App" role="application">
+                <header className="App-header" role="banner">
                     <h1 className="App-title">Neighborhood Map</h1>
                     <Button
                         toggleMenu={this.toggleMenu}
@@ -74,7 +74,7 @@ class App extends Component {
                         </div>
                     )}
                 </header>
-                <div className="map" role="application">
+                <div className="map" role="map">
                     <MapContainer
                         google={window.google}
                         onPinClick={this.onPinClick}

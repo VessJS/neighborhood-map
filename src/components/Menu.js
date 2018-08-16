@@ -10,15 +10,14 @@ export class Menu extends Component {
 
     render() {
         return (
-            <ul className='menu'>
+            <div className='menu' role="list">
                 <Search
                     locations={locations}
                     onSearchCategory={this.onSearchCategory}
                     searchQuery={this.searchQuery}
                     onListItemClick={this.props.onListItemClick}
                 />
-
-            </ul>
+            </div>
         );
     };
 }
