@@ -8,7 +8,9 @@ class Search extends Component {
             searchQuery: '',
         }
         this.locations = props.locations;
+        this.activeMarker = props.activeMarker;
     }
+
     // targets input value and set it to state
     onSearchCategory = event => {
         this.setState({
@@ -17,10 +19,25 @@ class Search extends Component {
     };
 
     render() {
+        const INPUT_STYLE = {
+            boxSizing: `border-box`,
+            MozBoxSizing: `border-box`,
+            border: `1px solid transparent`,
+            width: `240px`,
+            height: `32px`,
+            marginTop: `20px`,
+            marginBottom: `5px`,
+            padding: `3px 12px`,
+            borderRadius: `1px`,
+            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+            fontSize: `14px`,
+            outline: `none`,
+            textOverflow: `ellipses`,
+        };
         // filter locations 
         let filteredLocations = this.props.locations.filter(
             (location) => {
-                return location.category.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1 || location.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1 ;
+                return location.category.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1 || location.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1
             }
         );
         return (
@@ -30,6 +47,7 @@ class Search extends Component {
                     value={this.state.searchQuery}
                     onChange={this.onSearchCategory.bind(this)}
                     tabIndex="1"
+                    style={INPUT_STYLE }
                 />
                 <label htmlFor="input" className="search-label">
                     <br></br>Search by category or name (restaurant, hotel, attraction)

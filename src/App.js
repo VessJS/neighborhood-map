@@ -51,7 +51,7 @@ class App extends Component {
                         <div>
                             <Menu
                                 className="menu"
-                                // onListItemClick={this.onListItemClick}
+                                onListItemClick={this.onListItemClick}
                             />
                         </div>
                     )}

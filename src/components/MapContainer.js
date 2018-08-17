@@ -5,14 +5,18 @@ import locations from '../Data/locations';
 
 
 export class MapContainer extends Component {
-    state = {
-        activeMarker: {},
-        selectedPlace: {},
-        locationImage: '',
-        markerAnimation: 0,
-        error: false,
-    };
-     // Added all markers to one array
+    constructor(props) {
+        super(props)
+        this.state = {
+            activeMarker: {},
+            selectedPlace: {},
+            locationImage: '',
+            markerAnimation: 0,
+            error: false,
+        };
+        this.locations = props.locations;
+    }
+    // Added all markers to one array
     allMarkers = [];
     addMarker = marker => {
         if (marker) {
@@ -21,7 +25,7 @@ export class MapContainer extends Component {
     };
     // This happens when item on list is clicked
     onListItemClick = (e, props) => {
-        const clickId = e.currentTarget.dataset.indexNumber;
+        const clickId = e.currentTarget.venueId;
         const click = this.allMarkers.filter(
             el => el.marker.id === clickId
         );
@@ -46,7 +50,6 @@ export class MapContainer extends Component {
         const flickrKey = "7ef1ac0ab2778bc938233edba3b4ff9c";
         // const googlePlacesKey = "AIzaSyBLD7sQ6PARsHM1iR-fz8AgujeV2d924Kk";
         // const secret = "19b4fb9bdb7a8ad7";
-
         fetch(
             // `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${props.name}&inputtype=textquery&fields=photos,formatted_address,name,geometry&key=${googlePlacesKey}`
 
@@ -63,7 +66,7 @@ export class MapContainer extends Component {
             })
             .catch(error => {
                 console.log(error);
-                alert(error);
+                alert("We're sorry. Application can't load image correctly.");
                 this.setState({
                     error: true
                 });
@@ -75,9 +78,9 @@ export class MapContainer extends Component {
     };
 
     onMarkerAnimation = () => {
-        if (this.state.markerAnimation === 1) {
+        if (this.state.activeMarker === 1) {
             this.setState({
-                markerIcon: '../icon/blue_icon.png',
+                markerIcon: 'google.maps.Animation.DROP',
             })
         }
         else {
@@ -121,7 +124,7 @@ export class MapContainer extends Component {
                 style={style}
                 zoom={13}
                 onClick={this.onMapClicked}
-                onListItemClick={this.props.onListItemClick}
+                onListItemClick={this.onListItemClick.bind(this)}
                 initialCenter={{
                     lat: 54.5188898,
                     lng: 18.5305409
@@ -135,6 +138,9 @@ export class MapContainer extends Component {
                         position={location.location}
                         key={location.venueId}
                         ref={this.props.addMarker}
+                        onListItemClick={this.onListItemClick.bind(this)}
+                        icon={this.state.markerIcon}
+                        animation={this.state.markerIcon}
                     />
                 ))}
                 <InfoWindow
@@ -145,7 +151,9 @@ export class MapContainer extends Component {
                 >
                     <div className="info-window">
                         <img alt={this.state.selectedPlace.name} src={this.state.locationImage} width={300} height={200} />
-                        <h1>{this.state.selectedPlace.name}</h1>
+                        <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
+                            {this.state.selectedPlace.name}
+                        </div>
                         <h5>Images are fetched from Flickr</h5>
                     </div>
                 </InfoWindow>
