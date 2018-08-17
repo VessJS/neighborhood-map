@@ -6,7 +6,6 @@ class Search extends Component {
         super(props);
         this.state = {
             searchQuery: '',
-            activeMarker: {},
         }
         this.locations = props.locations;
     }
@@ -21,7 +20,7 @@ class Search extends Component {
         // filter locations 
         let filteredLocations = this.props.locations.filter(
             (location) => {
-                return location.category.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1;
+                return location.category.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1 || location.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1 ;
             }
         );
         return (
@@ -33,7 +32,7 @@ class Search extends Component {
                     tabIndex="1"
                 />
                 <label htmlFor="input" className="search-label">
-                    <br></br>Search by category (restaurant, hotel, attraction)
+                    <br></br>Search by category or name (restaurant, hotel, attraction)
                     </label>
                 {/* show filtered locations */}
                 {filteredLocations.map((locaction) => {

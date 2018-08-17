@@ -1,5 +1,6 @@
 export const locations = [{
         name: "Aquarium",
+        searchName: "Aquarium",
         location: {
             address: 'al. Jana Pawła II',
             lat: 54.51838849,
@@ -9,7 +10,8 @@ export const locations = [{
         category: "attraction"
     },
     {
-        name: "Pierożek Pierogarnia",
+        // name: "Pierożek Pierogarnia",
+        name: "Pierogarnia",
         location: {
             address: 'al. Jana Pawła II',
             lat: 54.51853173,
@@ -20,6 +22,7 @@ export const locations = [{
     },
     {
         name: "ORP Błyskawica",
+        searchName: "ORP Błyskawica",
         location: {
             address: 'al. Jana Pawła II',
             lat: 54.5195615,
@@ -29,7 +32,8 @@ export const locations = [{
         category: "attraction"
     },
     {
-        name: "Restauracja Barracuda",
+        // name: "Restauracja Barracuda",
+        name: "Restauracja",
         location: {
             address: 'Bulwar Nadmorski im.Feliksa Nowowiejskiego 10',
             lat: 54.505679,
@@ -40,6 +44,7 @@ export const locations = [{
     },
     {
         name: "Dom Marynarza",
+        searchName: "Dom Marynarza",
         location: {
             address: 'aleja Piłsudskiego',
             lat: 54.5078537,

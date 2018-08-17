@@ -18,12 +18,7 @@ class App extends Component {
         activeMarker: {},
     };
     // Added all markers to one array
-    allMarkers = [];
-    addMarker = marker => {
-        if (marker) {
-            this.allMarkers.push(marker);
-        }
-    };
+  
     // This happens when info window is closed
     onInfoWindowClose = (props) => {
         this.setState({
@@ -32,17 +27,7 @@ class App extends Component {
             selectedPlace: null,
         });
     };
-    // This happens when item on list is closed
-    onListItemClick = (e) => {
-        const click = this.allMarkers.filter(
-            el => el.marker.name === e.target.textContent
-        );
-        this.setState({
-            activeMarker: click[0].marker,
-            showingInfoWindow: true,
-            markerAnimation: 1,
-        });
-    };
+   
     // This opens list item
     toggleMenu = () => {
         if (this.state.menuActive) {
@@ -69,21 +54,21 @@ class App extends Component {
                         <div>
                             <Menu
                                 className="menu"
-                                onListItemClick={this.onListItemClick}
+                                // onListItemClick={this.onListItemClick}
                             />
                         </div>
                     )}
                 </header>
-                <div className="map" role="map">
+                <div className="map">
                     <MapContainer
                         google={window.google}
-                        onPinClick={this.onPinClick}
                         onInfoWindowClose={this.onInfoWindowClose}
                         onMapClicked={this.onMapClicked}
                         appState={this.state}
                         marker={this.props.activeMarker}
                         locations={this.state.locations}
                         addMarker={this.addMarker}
+                       
                     />
                 </div>
             </div>
