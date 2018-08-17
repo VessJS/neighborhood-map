@@ -8,7 +8,7 @@ A single page application featuring a map showing locations of atractions in Gdy
 * clone or download the project
 * install all project dependencies with npm install
 * start the development server with npm start
-* To create a production build, use npm run build
+* To create a production build, use npm run build<br><br>
 The build folder will be ready to be deployed.
 You may serve it with a static server:
 

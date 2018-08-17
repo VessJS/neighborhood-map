@@ -16,9 +16,7 @@ class App extends Component {
         markerAnimation: 0,
         menuActive: false,
         activeMarker: {},
-    };
-    // Added all markers to one array
-  
+    };  
     // This happens when info window is closed
     onInfoWindowClose = (props) => {
         this.setState({
@@ -27,7 +25,6 @@ class App extends Component {
             selectedPlace: null,
         });
     };
-   
     // This opens list item
     toggleMenu = () => {
         if (this.state.menuActive) {
@@ -68,7 +65,6 @@ class App extends Component {
                         marker={this.props.activeMarker}
                         locations={this.state.locations}
                         addMarker={this.addMarker}
-                       
                     />
                 </div>
             </div>

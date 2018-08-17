@@ -12,6 +12,7 @@ export class MapContainer extends Component {
         markerAnimation: 0,
         error: false,
     };
+     // Added all markers to one array
     allMarkers = [];
     addMarker = marker => {
         if (marker) {
@@ -145,6 +146,7 @@ export class MapContainer extends Component {
                     <div className="info-window">
                         <img alt={this.state.selectedPlace.name} src={this.state.locationImage} width={300} height={200} />
                         <h1>{this.state.selectedPlace.name}</h1>
+                        <h5>Images are fetched from Flickr</h5>
                     </div>
                 </InfoWindow>
             </Map>
