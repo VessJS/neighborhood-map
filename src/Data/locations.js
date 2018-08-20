@@ -10,8 +10,8 @@ export const locations = [{
         category: "attraction"
     },
     {
-        // name: "Pierożek Pierogarnia",
         name: "Pierogarnia",
+        searchName: "Pierogarnia",
         location: {
             address: 'al. Jana Pawła II',
             lat: 54.51853173,
@@ -32,8 +32,8 @@ export const locations = [{
         category: "attraction"
     },
     {
-        // name: "Restauracja Barracuda",
         name: "Restauracja",
+        searchName: "Restauracja",
         location: {
             address: 'Bulwar Nadmorski im.Feliksa Nowowiejskiego 10',
             lat: 54.505679,

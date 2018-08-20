@@ -6,16 +6,20 @@ class Search extends Component {
         super(props);
         this.state = {
             searchQuery: '',
-        }
+        };
         this.locations = props.locations;
         this.activeMarker = props.activeMarker;
     }
 
     // targets input value and set it to state
-    onSearchCategory = event => {
+    onSearchQuery = event => {
+        this.props.searchQuery(event.target.value);
         this.setState({
             searchQuery: event.target.value
         })
+    };
+    onListItemClick = event => {
+        this.props.onListItemClick(event.target.childNodes[0].data);
     };
 
     render() {
@@ -45,9 +49,9 @@ class Search extends Component {
                 <input type="text"
                     className="search-input"
                     value={this.state.searchQuery}
-                    onChange={this.onSearchCategory.bind(this)}
+                    onChange={this.onSearchQuery.bind(this)}
                     tabIndex="1"
-                    style={INPUT_STYLE }
+                    style={INPUT_STYLE}
                 />
                 <label htmlFor="input" className="search-label">
                     <br></br>Search by category or name (restaurant, hotel, attraction)
@@ -55,7 +59,7 @@ class Search extends Component {
                 {/* show filtered locations */}
                 {filteredLocations.map((locaction) => {
                     return <ListItem
-                        onListItemClick={this.props.onListItemClick}
+                        onListItemClick={this.onListItemClick.bind(this)}
                         name={locaction.name}
                         key={locaction.venueId}
                     />

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './MapContainer.css';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-import locations from '../Data/locations';
-
 
 export class MapContainer extends Component {
     constructor(props) {
@@ -11,20 +9,15 @@ export class MapContainer extends Component {
             activeMarker: {},
             selectedPlace: {},
             locationImage: '',
-            markerAnimation: 0,
             error: false,
         };
         this.locations = props.locations;
+        props.onCreate(this)
     }
-    // Added all markers to one array
-    allMarkers = [];
-    addMarker = marker => {
-        if (marker) {
-            this.allMarkers.push(marker);
-        }
-    };
     // This happens when item on list is clicked
     onListItemClick = (e, props) => {
+        this.resetActiveMarker();
+
         const clickId = e.currentTarget.venueId;
         const click = this.allMarkers.filter(
             el => el.marker.id === clickId
@@ -32,35 +25,51 @@ export class MapContainer extends Component {
         this.setState({
             activeMarker: click[0].marker,
             showingInfoWindow: true,
-            markerAnimation: 1,
         });
     };
 
+    openInfoWindow = (query) => {
+        let marker = this.refs[query];
+        if (marker) {
+            this.onPinClick(marker.props, marker.marker);
+        }
+    };
+
+    filterMarkers = (id) => {
+        for (let i in this.refs) {
+            if (this.refs.hasOwnProperty(i)) {
+                let marker = this.refs[i].marker;
+                if (i.toLowerCase().indexOf(id.toLowerCase()) !== -1) {
+                    marker.setVisible(true);
+                } else {
+                    marker.setVisible(false);
+                }
+            }
+        }
+    };
+
     onPinClick = (props, marker) => {
+
+        this.resetActiveMarker();
+
         this.setState({
             showingInfoWindow: true,
             activeMarker: marker,
             selectedPlace: props,
             locationImage: 'http://www.wallpaperama.com/post-images/forums/200903/07p-6606-loading-photo.gif',
-            markerAnimation: 1,
-            error: false,
-            markerIcon: '',
+            error: false
         });
 
-        const flickrKey = "7ef1ac0ab2778bc938233edba3b4ff9c";
-        // const googlePlacesKey = "AIzaSyBLD7sQ6PARsHM1iR-fz8AgujeV2d924Kk";
-        // const secret = "19b4fb9bdb7a8ad7";
-        fetch(
-            // `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${props.name}&inputtype=textquery&fields=photos,formatted_address,name,geometry&key=${googlePlacesKey}`
+        marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
 
-            `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrKey}&tags=${props.name}&pages=1&per_page=10&extras=url_o&format=json&nojsoncallback=1`
-        )
+        const flickrKey = "7ef1ac0ab2778bc938233edba3b4ff9c";
+    
+        fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${flickrKey}&tags=${props.name}&pages=1&per_page=10&extras=url_o&format=json&nojsoncallback=1`)
             .then(response => response.json())
             .then(photos => {
                 console.log(photos);
                 this.setState({
                     locationImage:
-                        // `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photos.candidates[0].photos[0].photo_reference}&key=${googlePlacesKey}`
                         `https://farm${photos.photos.photo[1].farm}.staticflickr.com/${photos.photos.photo[1].server}/${photos.photos.photo[1].id}_${photos.photos.photo[1].secret}.jpg`
                 });
             })
@@ -77,36 +86,31 @@ export class MapContainer extends Component {
         }
     };
 
-    onMarkerAnimation = () => {
-        if (this.state.activeMarker === 1) {
-            this.setState({
-                markerIcon: 'google.maps.Animation.DROP',
-            })
+    resetActiveMarker = () => {
+        if (this.state.activeMarker && this.state.activeMarker.setAnimation) {
+            this.state.activeMarker.setAnimation(null);
         }
-        else {
-            this.setState({
-                markerIcon: '',
-            })
-        }
-    }
+    };
 
     onMapClicked = (props) => {
+
+        this.resetActiveMarker();
+
         if (this.state.showingInfoWindow) {
             this.setState({
                 showingInfoWindow: false,
-                activeMarker: null,
-                markerAnimation: 0,
+                activeMarker: null
             })
         }
     };
 
     onInfoWindowClose = (props) => {
+
+        this.resetActiveMarker();
+
         this.setState({
             showingInfoWindow: false,
             activeMarker: null,
-            selectedPlace: null,
-            markerAnimation: 0,
-            locations: locations,
         });
     };
 
@@ -117,6 +121,7 @@ export class MapContainer extends Component {
             height: '70vh',
             position: 'relative'
         };
+
         return (
             <Map
                 className="map-container"
@@ -137,16 +142,15 @@ export class MapContainer extends Component {
                         name={location.name}
                         position={location.location}
                         key={location.venueId}
-                        ref={this.props.addMarker}
+                        ref={location.name}
                         onListItemClick={this.onListItemClick.bind(this)}
                         icon={this.state.markerIcon}
-                        animation={this.state.markerIcon}
                     />
                 ))}
                 <InfoWindow
                     marker={this.state.activeMarker}
                     visible={this.state.showingInfoWindow}
-                    onClose={this.props.onInfoWindowClose}
+                    onClose={this.onInfoWindowClose.bind(this)}
                     onListItemClick={this.props.onListItemClick}
                 >
                     <div className="info-window">
@@ -160,8 +164,10 @@ export class MapContainer extends Component {
             </Map>
         );
     }
+
 }
 
 export default GoogleApiWrapper({
-    apiKey: ("AIzaSyDF1sMgvToCsxgaeFVp49tGp0_5jJv4jTU")
+    apiKey: ("AIzaSyDF1sMgvToCsxgaeFVp49tGp0_5jJv4jTU"),
+    instance: this
 })(MapContainer)

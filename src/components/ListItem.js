@@ -1,7 +1,6 @@
 import React from "react";
 
 export const ListItem = (props) => {
-    console.log(props.onListItemClick)
     return (
         <li className="list-item"
             onClick={props.onListItemClick}
